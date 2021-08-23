@@ -1,12 +1,12 @@
 package com.devHyeun.gitEx04.domain.member;
 
 
+import com.devHyeun.gitEx04.domain.order.Order;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @ToString
@@ -19,6 +19,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MEMBER_ID")
     private Long id;
 
     private String name;
@@ -27,6 +28,7 @@ public class Member {
     private String street;
     private String zipcode;
 
-
+    @OneToMany(mappedBy = "member")
+    private List<Order> orders = new ArrayList<>();
 
 }

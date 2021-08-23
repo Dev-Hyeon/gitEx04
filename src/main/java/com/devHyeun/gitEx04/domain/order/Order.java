@@ -27,12 +27,31 @@ public class Order {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToMany
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
 
     @Enumerated(EnumType.STRING)
     private OrderState status; // 주문상태
+
+
+
+    public void setMember(Member member) {
+
+        // 기존관계 제거
+        if (this.member != null) {
+            this.member.getOrders().remove(this);
+        }
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+
+    }
+
 
 
 

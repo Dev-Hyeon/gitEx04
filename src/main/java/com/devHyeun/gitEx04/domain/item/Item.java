@@ -20,7 +20,7 @@ public class Item {
     @Column(name = "ITEM_ID")
     private Long id;
 
-    private String name;
-    private int price;
+    private String name;        // 이름
+    private int price;          // 가격
     private int stockQuentity;  // 재고수량
 }
